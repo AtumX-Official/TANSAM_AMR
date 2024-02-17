@@ -1,0 +1,38 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="True"/>
+  <arg name="map_file" default="$(find rur_navigation)/maps/tansam_1.yaml"/>
+  <!-- <arg name="map_file" default="$(find rur_navigation)/maps/test_map.yaml"/> -->
+
+  <!-- Really Usefull Robot -->
+
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="$(find rur_navigation)/launch/amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find rur_navigation)/launch/move_base.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include>
+  
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_depth_cam" -->
+    <!-- args="-0.05 0.0 0.1 4.713 1.706 3.412 /base_link /camera_depth_frame 40" />  -->
+
+
+
+  <!-- IMU complementary filter-->
+  <!-- <node name="imu_filter" pkg="imu_complementary_filter" type="complementary_filter_node" >
+  </node> -->
+
+
+
+
+   <!--Robot Localization Node-->
+   <!--node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true"> 
+    <rosparam command="load" file="$(find robot_localization)/params/ekf.yaml" />  
+    <remap from="odometry/filtered" to="odom"/>  
+   </node --> 
+</launch>

@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="rosserial_arduino" type="serial_node.py" name="serial_node" output="screen">
+        <param name="port" value="/dev/ttyACM0" />
+    </node>
+  <node name= "set_path" type="newgoal3.py" pkg="t_description" />
+  <node name= "amcl_regenerator" type="amcl_regenerator.py" pkg="t_description" />
+  
+  <include file="$(find rplidar_ros)/launch/rplidar_s2.launch" />
+  <include file="$(find tansam_amr2_description)/launch/display.launch" />
+  <include file="$(find rur_navigation)/launch/rur_navigation2.launch" />
+</launch>

@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<robot name="t" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find t_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find t_description)/urdf/t.trans" />
+<xacro:include filename="$(find t_description)/urdf/t.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.010031150965119022 0.0 0.05524497619721815" rpy="0 0 0"/>
+    <mass value="31.112794963221436"/>
+    <inertia ixx="0.924382" iyy="1.817632" izz="2.706085" ixy="-0.0" iyz="-0.0" ixz="0.008208"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<link name="lidar_body_1">
+  <inertial>
+    <origin xyz="2.7755575615628914e-17 3.692616773037007e-17 0.020000000000000018" rpy="0 0 0"/>
+    <mass value="0.16317432242745386"/>
+    <inertia ixx="7.2e-05" iyy="7.2e-05" izz="0.0001" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.1 -0.0 -0.175" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/lidar_body_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.1 -0.0 -0.175" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/lidar_body_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wl_1">
+  <inertial>
+    <origin xyz="-9.650038500203368e-18 -0.015000000000000013 0.0" rpy="0 0 0"/>
+    <mass value="0.21912608758788835"/>
+    <inertia ixx="0.000153" iyy="0.000274" izz="0.000153" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.31 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/right_wl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.31 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/right_wl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wl_1">
+  <inertial>
+    <origin xyz="-9.650038500203396e-18 0.015000000000000013 -2.0816681711721685e-17" rpy="0 0 0"/>
+    <mass value="0.21912608758788774"/>
+    <inertia ixx="0.000153" iyy="0.000274" izz="0.000153" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.31 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/left_wl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.31 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://t_description/meshes/left_wl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="-0.1 0.0 0.175" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_body_1"/>
+</joint>
+
+<joint name="Rev5" type="continuous">
+  <origin xyz="0.0 -0.31 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wl_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rev6" type="continuous">
+  <origin xyz="0.0 0.31 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wl_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+</robot>

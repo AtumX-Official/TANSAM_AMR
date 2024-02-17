@@ -1,0 +1,33 @@
+<!-- Example launch file (my_combined_launch.launch) -->
+<launch>
+  <!-- Include the RealSense camera launch -->
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="enable_gyro" value="true"/>
+    <arg name="enable_accel" value="true"/>
+  </include>
+  
+<!-- Launch the imu.py script using rosrun -->
+  <arg name="node_start_delay" default="1.0" />  
+  <node name="imu_node" pkg="amr_launch" type="imu.py" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' " />
+
+  <!-- Add the imu_filter_node using rosrun -->
+  <node name="imu_filter_node" pkg="imu_filter_madgwick" type="imu_filter_node" output="screen">
+    <param name="use_mag" type="bool" value="false"/>
+    <param name="publish_tf" type="bool" value="false"/>
+    <param name="world_frame" type="string" value="enu"/>
+  </node>
+
+<!-- Launch the brake.py script using rosrun -->
+  <node name="brake_node" pkg="amr_launch" type="brake.py" output="screen">
+  </node>
+  
+ <!-- Launch the newgoal3.py script using rosrun -->
+  <node name="goal_node" pkg="amr_launch" type="newgoal3.py" output="screen">
+  </node>
+  
+ <!-- Launch the pub_initpose.py script using rosrun -->
+  <node name="initial_pose_node" pkg="amr_launch" type="pub_initpose.py" output="screen">
+  </node>
+  
+</launch>
+

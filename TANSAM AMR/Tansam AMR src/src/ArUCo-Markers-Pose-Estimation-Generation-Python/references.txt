@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/27348139/camera-calibration-with-opencv-findchessboardcorners-returns-false

@@ -1,0 +1,18 @@
+<launch>
+  <arg name="model" default="$(find t_description)/urdf/turtlebot3_burger.urdf.xacro"/>
+  <arg name="gui" default="false"/>
+  <arg name="rvizconfig" default="$(find t_description)/launch/urdf.rviz"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+  <param name="use_gui" value="$(arg gui)"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  
+  
+<node pkg="differential_drive" name="diff" type="diff_tf.py" output="screen"> 
+  ..
+</node>
+
+
+
+
+</launch>

@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<robot name="tansam_amr2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find tansam_amr2_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find tansam_amr2_description)/urdf/tansam_amr2.trans" />
+<xacro:include filename="$(find tansam_amr2_description)/urdf/tansam_amr2.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0006517442981175278 -1.382042401027964e-16 0.15484952545265696" rpy="0 0 0"/>
+    <mass value="793.4867488827044"/>
+    <inertia ixx="30.792904" iyy="67.474107" izz="94.937192" ixy="-0.0" iyz="-0.0" ixz="-0.083049"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="1.8492152253912764e-15 -0.10489130114225886 0.0" rpy="0 0 0"/>
+    <mass value="2.2421471871138"/>
+    <inertia ixx="0.00292" iyy="0.002491" izz="0.00292" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.01925 0.2067 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.01925 0.2067 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="1.863093013199091e-15 0.10489130114225903 1.3877787807814457e-16" rpy="0 0 0"/>
+    <mass value="2.2421471871137997"/>
+    <inertia ixx="0.00292" iyy="0.002491" izz="0.00292" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.01925 -0.2067 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.01925 -0.2067 -0.05" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="1.6653345369377348e-16 2.5216763657397544e-17 0.017661701829302323" rpy="0 0 0"/>
+    <mass value="1.4156323757317377"/>
+    <inertia ixx="0.000716" iyy="0.000716" izz="0.001087" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.10525 -0.0 -0.3465" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.10525 -0.0 -0.3465" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://tansam_amr2_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+<joint name="Revolute_right" type="continuous">
+  <origin xyz="-0.01925 -0.2067 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Revolute_left" type="continuous">
+  <origin xyz="-0.01925 0.2067 0.05" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.10525 0.0 0.3465" rpy="0 0 3.1416"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+
+
+</robot>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

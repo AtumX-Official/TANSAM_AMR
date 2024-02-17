@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<robot name="tansam_amr2" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="Revolute_right_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_right">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_right_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Revolute_left_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="Revolute_left">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Revolute_left_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>

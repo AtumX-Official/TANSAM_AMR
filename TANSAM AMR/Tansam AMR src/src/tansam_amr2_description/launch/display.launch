@@ -1,0 +1,33 @@
+<launch>
+  <arg name="model" default="$(find tansam_amr2_description)/urdf/tansam_amr2.xacro"/>
+  <arg name="gui" default="false"/>
+  <arg name="rvizconfig" default="$(find tansam_amr2_description)/launch/nav.rviz"/>
+  <node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+  <param name="use_gui" value="$(arg gui)"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+
+<node pkg="differential_drive" name="diff" type="diff_tf.py" output="screen"/>
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_link_to_depth_cam"
+    args="-0.020 0.0 0.22 0 0.0 0 /base_link /camera_depth_frame 40" /--> 
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link"
+    args="-0.015 0.0 0.3 1.5708 0.0 -1.5708 /base_link /camera_imu_optical_frame 10" /-->
+
+<!--node pkg="tf" type="static_transform_publisher" name="base_link_to_camera_link"
+    args="-0.015 0.0 0.3 3.1416 0.0 0.0 /base_link /camera_link 10" (180 degree )/-->
+
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_imu_link"
+    args="-0.015 0.0 0.3 0.0 0.0 0.0 /base_link /imu_link 100" />
+
+ <!--Robot Localization Node-->
+   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true"> 
+    <rosparam command="load" file="$(find robot_localization)/params/ekf.yaml" />  
+    <remap from="odometry/filtered" to="odom"/>  
+   </node> 
+
+</launch>
+

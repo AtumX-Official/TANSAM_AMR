@@ -1,0 +1,30 @@
+<!-- LAUNCH FILE TO LAUNCH EVERYTHING  -->
+<launch>
+
+  <!-- Include the tansam_amr2_description launch -->
+  <include file="$(find amr_launch)/launch/imu.launch">
+  </include>
+
+
+  <!-- Run rosserial_arduino serial_node.py with _port parameter -->
+  <arg name="node_start_delay_1" default="15.0" />  
+  <node name="serial_node" pkg="rosserial_arduino" type="serial_node.py" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay_1); $0 $@' ">
+  <param name="port" type="string" value="/dev/ttyACM0"/>
+  </node>
+
+  <!-- Include the RPLIDAR launch -->
+  <include file="$(find rplidar_ros)/launch/rplidar_s2.launch">
+  </include>
+
+  <!-- Include the tansam_amr2_description launch -->
+  <include file="$(find tansam_amr2_description)/launch/display.launch">
+  </include>
+
+  <!-- Include the rur_navigation launch -->
+  <include file="$(find rur_navigation)/launch/rur_navigation2.launch">
+  </include>
+
+  <!-- Add other nodes or configurations here -->
+  <!-- node name="other_node" pkg="other_package_name" type="other_node" output="screen">
+  </node -->
+</launch>
